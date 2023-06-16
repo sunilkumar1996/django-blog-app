@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-SITE_ID = 1
+# SITE_ID = 1
 
 # Application definition
 
@@ -38,12 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+    'auth_app',
     'blog.apps.BlogConfig',
-
     'taggit',
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
-    # 'django.contrib.postgres',
     'ckeditor',
 ]
 
@@ -77,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -93,7 +90,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.test2',
     }
 }
 
@@ -138,7 +135,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # STATIC_DIR = BASE_DIR / 'static'
 # STATICFILES_DIRS = [STATIC_DIR,]
-# STATIC_ROOT = BASE_DIR / 'static'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # MEDIA file configration!!
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -149,6 +146,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'auth_app.User'
 
 # E-mail
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

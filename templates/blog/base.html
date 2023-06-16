@@ -27,10 +27,13 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:post_list' %}">Blogs</a></li>
-					<!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
-					<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
-					<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li> -->
+					<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:post_list' %}">Home</a></li>
+					{% if request.user.is_authenticated %}
+						<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Logout</a></li>
+					{% else %}
+						<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login_view' %}">Login</a></li>
+						<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register_view' %}">Register</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
@@ -41,7 +44,11 @@
 				<div class="col-md-10 col-lg-8 col-xl-7">
 					<div class="site-heading">
 						<h1>My Blog</h1>
-						<span class="subheading">This is Blog Application</span>
+						{% if request.user.is_authenticated %}
+							<span class="subheading">Hi, {{ request.user.first_name|title }} {{ request.user.last_name|title }}</span>
+						{% else %}
+							<span class="subheading">This is Blog Application</span>
+						{% endif %}
 					</div>
 				</div>
 			</div>

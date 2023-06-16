@@ -5,3 +5,5 @@ blog/__pycache__/
 blog/migrations/__pycache__/
 mysite/__pycache__/
 blog/templatetags/__pycache__/
+/auth_app/__pycache__/
+/auth_app/migrations/__pycache__/

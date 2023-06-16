@@ -59,7 +59,7 @@ def post_detail(request, year, month, day, post):
     logger.info(f"User visited in post_detail method!")
     post = get_object_or_404(Post, slug=post, status='published', publish__year=year, publish__month=month, publish__day=day)
     # List of active comments for this post
-    comments = post.comments.filter(active=True)
+    comments = post.comments.filter(active=True).order_by('-created')
     new_comment = None
     if request.method == 'POST':
         logger.info(f"User requsted for post method in comment detail!")
