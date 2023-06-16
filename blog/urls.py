@@ -6,9 +6,9 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', views.PostListView.as_view(), name='post_list'),
-    path('tag/<slug:tag_slug>/', views.post_list, name='post_list_by_tag'),
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
-    path('<int:post_id>/share/', views.PostShareView.as_view(), name='post_share'),
-    path('feed/', LatestPostsFeed(), name='post_feed'),
-    path('search/', views.post_search, name='post_search'),
+    path('blog/tag/<slug:tag_slug>/', views.post_list, name='post_list_by_tag'),
+    path('blog/<int:year>/<int:month>/<int:day>/<slug:post>/', views.post_detail, name='post_detail'),
+    path('blog/<int:post_id>/share/', views.PostShareView.as_view(), name='post_share'),
+    path('blog/feed/', LatestPostsFeed(), name='post_feed'),
+    path('blog/search/', views.post_search, name='post_search'),
 ]
