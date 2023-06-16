@@ -10781,9 +10781,10 @@ header.masthead .post-heading .meta a {
 .post-preview > a > .post-subtitle {
   font-weight: 300;
   margin-bottom: 0.625rem;
+  font-size: 18px !important;
 }
 .post-preview > .post-meta {
-  font-size: 1.125rem;
+  font-size: 14px;
   font-style: italic;
   margin-top: 0;
   color: #6c757d;
@@ -10793,6 +10794,6 @@ header.masthead .post-heading .meta a {
 }
 @media (min-width: 992px) {
   .post-preview > a > .post-title {
-    font-size: 2.25rem;
+    font-size: 24px;
   }
 }

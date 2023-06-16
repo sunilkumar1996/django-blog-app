@@ -5,18 +5,6 @@
 
 {% block style %}
 <style>
-	/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700'); */
-
-	/* * {
-		border-radius: 0px !important;
-		border: 0px !important;
-	} */
-
-	/* body{
-	margin: 0px;
-	font-family: "Poppins", sans-serif !important;
-	background: #FED18C !important;
-	} */
 
 	.height-vh {
 		height: 100vh;
@@ -52,6 +40,9 @@
 
 	.cursor:hover {
 		color: blue;
+	}
+	.show_all_comments_div{
+		font-size: 15px;
 	}
 </style>
 {% endblock style %}
@@ -89,12 +80,9 @@
 				{% endwith %}
 
 				{% for comment in comments %}
-				<div class="d-flex flex-column" id="comment-container">
+				{% if forloop.counter <= 3 %} <div class="d-flex flex-column" id="comment-container">
 					<div class="bg-white">
 						<div class="flex-row d-flex">
-							<!-- <img src="dp.jpg" width="40" class="rounded-circle"> -->
-							<!-- <span class="rounded-circle" width="40"><i class="fa-solid fa-user"></i></span> -->
-							<!-- <i class="fa-solid fa-user rounded-circle"></i> -->
 							<div class="d-flex flex-column justify-content-start ml-2">
 								<span class="d-block font-weight-bold name">{{ comment.name|title }}</span>
 								<span class="date text-black-50 comment-date">Public - {{ comment.created }}</span>
@@ -104,33 +92,62 @@
 							<p class="comment-text" style="margin:0px;">{{ comment.body|linebreaks }}</p>
 						</div>
 					</div>
-					<div class="bg-white">
-						<div class="d-flex flex-row fs-14">
-							<div class="p-2 cursor p-2"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span>
+					<!-- <div class="bg-white">
+							<div class="d-flex flex-row fs-14">
+								<div class="p-2 cursor p-2"><i class="fa fa-thumbs-o-up"></i><span class="ml-1">Like</span>
+								</div>
+								<div class="p-2 cursor p-2"><i class="fa fa-comment"></i><span class="ml-1">Reply</span>
+								</div>
+								<div class="p-2 cursor p-2"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
 							</div>
-							<!-- <div class="p-2 cursor p-2"><i class="fa fa-comment"></i><span class="ml-1">Reply</span> -->
-							<!-- </div>
-							<div class="p-2 cursor p-2"><i class="fa fa-share"></i><span class="ml-1">Share</span></div> -->
+						</div> -->
+			</div>
+			{% else %}
+			<div class="d-flex flex-column hide_comments d-none" id="comment-container">
+				<div class="bg-white">
+					<div class="flex-row d-flex">
+						<div class="d-flex flex-column justify-content-start ml-2">
+							<span class="d-block font-weight-bold name">{{ comment.name|title }}</span>
+							<span class="date text-black-50 comment-date">Public - {{ comment.created }}</span>
 						</div>
 					</div>
+					<div class="mt-3">
+						<p class="comment-text" style="margin:0px;">{{ comment.body|linebreaks }}</p>
+					</div>
 				</div>
-				{% empty %}
-					<p>There are no comments yet.</p>
-				{% endfor %}
-
-				{% if new_comment %}
-					<h2>Your comment has been added.</h2>
-				{% else %}
-					<h2>Add a new comment</h2>
-					<form method="post">
-						{{ comment_form.as_p }}
-						{% csrf_token %}
-						<p class="mt-3"><input type="submit" value="Add comment"></p>
-					</form>
-				{% endif %}
-
 			</div>
+			{% endif %}
+			{% empty %}
+			<p>There are no comments yet.</p>
+			{% endfor %}
+			{% if comments.count > 3 %}
+			<div class="show_all_comments_div mt-3">
+				<a class="show_all_comments " href="javascript:void(0);" onclick="Show_comments()"><u>See more..</u></a>
+			</div>
+			{% endif %}
+			{#% if new_comment %#}
+			<!-- <h2>Your comment has been added.</h2> -->
+			{#% else %#}
+			<h2 class="mt-4">Add a new comment</h2>
+			<form method="post">
+				{{ comment_form.as_p }}
+				{% csrf_token %}
+				<p class="mt-3"><input type="submit" value="Add comment"></p>
+			</form>
+			{#% endif %#}
+
 		</div>
+	</div>
 	</div>
 </article>
 {% endblock %}
+
+{% block javascript %}
+	<script>
+		function Show_comments(){
+			$('.hide_comments').removeClass('d-none');
+			$('.show_all_comments_div').hide();
+		};
+	</script>
+
+{% endblock javascript %}
